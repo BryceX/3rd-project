@@ -23,7 +23,6 @@ void Bullet::Collision(float a_x, float a_y, float enemy_x, float enemy_y, float
 	if ((((a_x - enemy_x)*(a_x - enemy_x)) + ((a_y - enemy_y)*(a_y - enemy_y))) < a_radius + enemy_radius)
 	{
 		health -= 1;
-		std::cout << "I HIT SOMETYHING";
 		if (health < 0)
 			isAlive = false;
 	}

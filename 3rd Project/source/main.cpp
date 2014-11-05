@@ -120,21 +120,16 @@ int main(int argc, char* argv[])
 					lyn.timeWhenShot = 0;
 				}
 			}
-
+			
 			for (int i = 0; i < bulletvector.size(); ++i)
 			{
 				for (int j = 0; j < type1vector.size(); ++j)
-				{				
+				{		
+					
 					if (bulletvector[i].isAlive)
 					{
 						
 						{
-
-							bulletvector[i].gameTime += deltaTime;
-							bulletvector[i].Movement();
-							bulletvector[i].Draw();
-
-						
 							if (type1vector[j].isAlive)
 							{
 								bulletvector[i].Collision(bulletvector[i].x, bulletvector[i].y, type1vector[j].x, type1vector[j].y, Globals::screenWidth*.05, Globals::screenWidth*.1);
@@ -144,6 +139,12 @@ int main(int argc, char* argv[])
 					}
 				}
 
+			}
+			for (int i = 0; i < bulletvector.size(); ++i)
+			{
+				bulletvector[i].Movement();
+				bulletvector[i].gameTime += deltaTime;
+				bulletvector[i].Draw();
 			}
 
 			// Player and Enemy
