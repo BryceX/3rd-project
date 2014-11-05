@@ -29,16 +29,16 @@ int main(int argc, char* argv[])
 	Background mainmenu;
 	mainmenu.menuBackground = CreateSprite("./images/mainmenu.png", Globals::screenWidth, Globals::screenHeight*1.0055, true);
 	mainmenu.menuBackground2 = CreateSprite("./images/mainmenu.png", Globals::screenWidth, Globals::screenHeight*1.0055, true);
-	Background stage1;
-	stage1.gameStage1 = CreateSprite("./images/stage1background.png", Globals::screenWidth*.75, Globals::screenHeight * 3, true);
-	Player lyn;
-	lyn.health = 5;
-	lyn.width = Globals::screenWidth*.05;
-	lyn.height = Globals::screenHeight*.05;
-	lyn.spriteID = CreateSprite("./images/lyn.png", lyn.width, lyn.height, true);
-	lyn.x = Globals::screenWidth*.5;
-	lyn.y = Globals::screenHeight*.05;
-	lyn.SetKey(GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D);
+	Background gamestage1;
+	gamestage1.stage1 = CreateSprite("./images/stage1background.png", Globals::screenWidth*.75, Globals::screenHeight * 3, true);
+	Player player1;
+	player1.health = 5;
+	player1.width = Globals::screenWidth*.05;
+	player1.height = Globals::screenHeight*.05;
+	player1.spriteID = CreateSprite("./images/legault.png", player1.width, player1.height, true);
+	player1.x = Globals::screenWidth*.5;
+	player1.y = Globals::screenHeight*.05;
+	player1.SetKey(GLFW_KEY_W, GLFW_KEY_S, GLFW_KEY_A, GLFW_KEY_D);
 	//lyn.firingKey = 'F';	
 
 	float deltaTime;
@@ -46,7 +46,6 @@ int main(int argc, char* argv[])
 	dagger.health = 1;
 	dagger.width = Globals::screenWidth *.025;
 	dagger.height = Globals::screenHeight *.025;
-
 	dagger.gameTime = 0;
 
 	for (int i = 0; i < 12; i++)
@@ -104,20 +103,20 @@ int main(int argc, char* argv[])
 
 			gameTimePassed += GetDeltaTime();
 
-			if (lyn.health < 0)
+			if (player1.health < 0)
 			{
 				currentState = GAMEOVER;
 			}
 
-			lyn.Move(deltaTime);
-			lyn.Draw();
+			player1.Move(deltaTime);
+			player1.Draw();
 
 			if (IsKeyDown(GLFW_KEY_F))
 			{
-				if (lyn.firingDelay < lyn.timeWhenShot)
+				if (player1.firingDelay < player1.timeWhenShot)
 				{
-					ShootBullet(lyn.x, lyn.y);
-					lyn.timeWhenShot = 0;
+					ShootBullet(player1.x, player1.y);
+					player1.timeWhenShot = 0;
 				}
 			}
 			
@@ -128,7 +127,7 @@ int main(int argc, char* argv[])
 					
 					if (bulletvector[i].isAlive)
 					{
-						
+						bulletvector[i].Draw();
 						{
 							if (type1vector[j].isAlive)
 							{
@@ -144,7 +143,7 @@ int main(int argc, char* argv[])
 			{
 				bulletvector[i].Movement();
 				bulletvector[i].gameTime += deltaTime;
-				bulletvector[i].Draw();
+
 			}
 
 			// Player and Enemy
@@ -154,10 +153,11 @@ int main(int argc, char* argv[])
 				{
 				type1vector[i].Movement();
 				type1vector[i].Draw();
-				lyn.Collision(lyn.x, lyn.y, type1vector[i].x, type1vector[i].y, Globals::screenWidth*.1, Globals::screenWidth*.1);
+				player1.Collision(player1.x, player1.y, type1vector[i].x, type1vector[i].y, Globals::screenWidth*.1, Globals::screenWidth*.1);
+				type1vector[i].Collision(type1vector[i].x, type1vector[i].y, player1.x, player1.y, Globals::screenWidth*.1, Globals::screenWidth*.1);
 				}
 			}
-			if (gameTimePassed > 10)
+			if (gameTimePassed > 5)
 			{
 				gameTimePassed = 0;
 				for (int i = 0; i < 6; i++)

@@ -17,7 +17,6 @@ public:
 	void Draw();
 	void Shoot(int a_x, int a_y);
 	void Collision();
-	void GetXY(float playerX, float playerY);
 	float gameTime;
 	void Collision(float a_x, float a_y, float enemy_x, float enemy_y, float a_radius, float enemy_radius);
 	Bullet();

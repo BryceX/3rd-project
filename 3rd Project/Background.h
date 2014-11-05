@@ -15,8 +15,10 @@ public:
 	float menuBackgroundY2;
 	void MenuFlash();
 	void CreateMainMenuBackground();
-	unsigned int gameStage1;
-	float backgroundY;
+
+	unsigned int stage1;
+	float stage1Y;
+	void stageScroll();
 	Background();
 	~Background();
 };

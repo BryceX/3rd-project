@@ -32,6 +32,10 @@ void Background::MenuFlash()
 	}
 
 }
+void Background::stageScroll()
+{
+
+}
 
 void Background::CreateMainMenuBackground()
 {
